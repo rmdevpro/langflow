@@ -18,6 +18,7 @@ Langflow serves as the control and orchestration layer for LLM-based constructio
 - Archive location: `/mnt/irina_storage/archive/`
 - Project root: `/mnt/projects/langflow/`
 - Container approach: Privileged container with full host filesystem access
+- **Authentication keys**: `/mnt/projects/keys.txt` contains all API keys and credentials (GitHub, OpenAI, Anthropic, HuggingFace, etc.)
 
 ## Guidelines for AI Assistants
 
@@ -27,6 +28,7 @@ When working on this project:
 2. **Container must remain privileged** - Any configuration changes must preserve root filesystem access
 3. **System-level operations are expected** - Langflow may need to interact with host processes, filesystems, and resources
 4. **Archive integration** - Consider integration with the archive system at `/mnt/irina_storage/archive/`
+5. **Authentication** - Use credentials from `/mnt/projects/keys.txt` for API access and GitHub operations. Do NOT prompt user for authentication - the keys file contains all necessary credentials
 
 ## Project Status
 
