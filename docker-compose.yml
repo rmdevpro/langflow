@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  langflow:
+    build: .
+    container_name: langflow-joshua
+    privileged: true
+    network_mode: host
+    volumes:
+      # Root filesystem access
+      - /:/host:rw
+      # Direct access to archive
+      - /mnt/irina_storage/archive:/archive:rw
+      # Langflow data (flows, nodes, database) - stored in repository
+      - ./data:/app/langflow_data:rw
+      # Docker socket access for container orchestration
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+    environment:
+      - LANGFLOW_DATABASE_URL=sqlite:////app/langflow_data/langflow.db
+      - LANGFLOW_CONFIG_DIR=/app/langflow_data
+      - LANGFLOW_HOST=0.0.0.0
+      - LANGFLOW_PORT=7860
+      # Allow Langflow to interact with host system
+      - LANGFLOW_WORKERS=4
+      - LANGFLOW_CACHE_TYPE=disk
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    # Run with full capabilities
+    cap_add:
+      - ALL
+    security_opt:
+      - apparmor:unconfined
+      - seccomp:unconfined

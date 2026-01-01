@@ -1,0 +1,2 @@
+# Langflow and core dependencies
+langflow>=1.3.0
