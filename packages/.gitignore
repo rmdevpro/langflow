@@ -1,0 +1,8 @@
+# Ignore all package files - too large for GitHub
+*.whl
+*.tar.gz
+*.tar.bz2
+*.zip
+
+# Keep this gitignore
+!.gitignore
